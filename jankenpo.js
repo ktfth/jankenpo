@@ -210,6 +210,7 @@ if (Meteor.isClient) {
       // scope shared functions
       $scope.onChoose = (element) => {
         $log.debug('on choose ' + element);
+        var api = 'https://still-shore-90545.herokuapp.com';
         var elements = [element];
         elements = nextElements(elements, element);
         elements = randomReverse(elements);
@@ -256,7 +257,7 @@ if (Meteor.isClient) {
 
         $log.debug(score.scorecard());
 
-        $http.post('https://still-shore-90545.herokuapp.com/rounds', {
+        $http.post(api + '/rounds', {
           wins: $scope.wins,
           losses: $scope.losses,
           draws: $scope.draws,
