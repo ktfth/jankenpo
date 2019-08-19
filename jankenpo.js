@@ -230,7 +230,7 @@ if (Meteor.isClient) {
       // scope shared functions
       $scope.onChoose = (element) => {
         $log.debug('on choose ' + element);
-        var api = 'https://still-shore-90545.herokuapp.com';
+        var api = 'https://jankenpo-api.herokuapp.com/';
         var elements = [element];
         elements = nextElements(elements, element);
         elements = randomReverse(elements);
