@@ -49,39 +49,39 @@ if (Meteor.isClient) {
         return Math.max(0, Math.round(Math.random() * 1));
       };
     }])
-    .factory('isRockFn', [() => {
-      return (el, rock) => el === rock;
+    .factory('isElFn', [() => {
+      return (a, b) => a === b;
     }])
-    .factory('isRockTossedFn', [() => {
+    .factory('isElTossedFn', [() => {
       return (a, b) => a && b;
     }])
-    .factory('isRockUntossedFn', [() => {
+    .factory('isElUntossedFn', [() => {
       return (a, b) => a && (!b);
     }])
     .factory('nextElements', [
       '$log', rock,
       paper, scissors,
-      'randomPosFn', 'isRockFn',
-      'isRockTossedFn',
-      'isRockUntossedFn', (
+      'randomPosFn', 'isElFn',
+      'isElTossedFn',
+      'isElUntossedFn', (
       $log, rock,
       paper, scissors,
-      randomPosFn, isRockFn,
-      isRockTossedFn,
-      isRockUntossedFn
+      randomPosFn, isElFn,
+      isElTossedFn,
+      isElUntossedFn
     ) => {
       return (elements, element) => {
         $log.debug('next elements ' + elements + ' with ' + element);
         let randomPosition = randomPosFn();
-        let isRock = isRockFn(element, rock);
-        let isRockTossed = isRockTossedFn(isRock, randomPosition);
-        let isRockUntossed = isRockUntossedFn(isRock, !randomPosition);
-        let isPaper = (element === paper);
-        let isPaperTossed = isPaper && (randomPosition);
-        let isPaperUntossed = isPaper && (!randomPosition);
-        let isScissors = (element === scissors);
-        let isScissorsTossed = isScissors && (randomPosition);
-        let isScissorsUntossed = isScissors && (!randomPosition);
+        let isRock = isElFn(element, rock);
+        let isRockTossed = isElTossedFn(isRock, randomPosition);
+        let isRockUntossed = isElUntossedFn(isRock, randomPosition);
+        let isPaper = isElFn(element, paper);
+        let isPaperTossed = isElTossedFn(isPaper, randomPosition);
+        let isPaperUntossed = isElUntossedFn(isPaper, randomPosition);
+        let isScissors = isElFn(element, scissors);
+        let isScissorsTossed = isElTossedFn(isScissors, randomPosition);
+        let isScissorsUntossed = isElUntossedFn(isScissors, randomPosition);
 
         if (isRockTossed) {
           elements.push(scissors, paper);
