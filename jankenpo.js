@@ -185,7 +185,7 @@ if (Meteor.isClient) {
       'isScissorsLoss', 'isScissorsWin',
       'drawAlert', 'lossAlert',
       'winAlert', 'showAlert',
-      '$http', (
+      '$http', 'uncoveredAlert', (
         $log, $scope,
         $ionicPopup, nextElements,
         randomReverse, machineChoice,
@@ -195,7 +195,7 @@ if (Meteor.isClient) {
         isScissorsLoss, isScissorsWin,
         drawAlert, lossAlert,
         winAlert, showAlert,
-        $http
+        $http, uncoveredAlert
       ) => {
       $log.debug('O controller principal esta funcionando!');
 
