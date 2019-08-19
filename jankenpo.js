@@ -44,15 +44,22 @@ if (Meteor.isClient) {
     .value(rock, ROCK)
     .value(paper, PAPER)
     .value(scissors, SCISSORS)
+    .factory('randomPosFn', ['$log', () => {
+      return () => {
+        return Math.max(0, Math.round(Math.random() * 1));
+      };
+    }])
     .factory('nextElements', [
       '$log', rock,
-      paper, scissors, (
+      paper, scissors,
+      'randomPosFn', (
       $log, rock,
-      paper, scissors
+      paper, scissors,
+      randomPosFn
     ) => {
       return (elements, element) => {
         $log.debug('next elements ' + elements + ' with ' + element);
-        let randomPosition = Math.max(0, Math.round(Math.random() * 1));
+        let randomPosition = randomPosFn();
         let isRock = (element === rock);
         let isRockTossed = isRock && (randomPosition);
         let isRockUntossed = isRock && (!randomPosition);
