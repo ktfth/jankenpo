@@ -44,6 +44,7 @@ if (Meteor.isClient) {
     .value(rock, ROCK)
     .value(paper, PAPER)
     .value(scissors, SCISSORS)
+    .value('apiUrl', 'https://jankenpo-api.herokuapp.com')
     .factory('randomPosFn', [() => {
       return () => {
         return Math.max(0, Math.round(Math.random() * 1));
@@ -185,7 +186,8 @@ if (Meteor.isClient) {
       'isScissorsLoss', 'isScissorsWin',
       'drawAlert', 'lossAlert',
       'winAlert', 'showAlert',
-      '$http', 'uncoveredAlert', (
+      '$http', 'uncoveredAlert',
+      'apiUrl', (
         $log, $scope,
         $ionicPopup, nextElements,
         randomReverse, machineChoice,
@@ -195,7 +197,8 @@ if (Meteor.isClient) {
         isScissorsLoss, isScissorsWin,
         drawAlert, lossAlert,
         winAlert, showAlert,
-        $http, uncoveredAlert
+        $http, uncoveredAlert,
+        apiUrl,
       ) => {
       $log.debug('O controller principal esta funcionando!');
 
@@ -230,7 +233,7 @@ if (Meteor.isClient) {
       // scope shared functions
       $scope.onChoose = (element) => {
         $log.debug('on choose ' + element);
-        var api = 'https://jankenpo-api.herokuapp.com/';
+        var api = apiUrl;
         var elements = [element];
         elements = nextElements(elements, element);
         elements = randomReverse(elements);
