@@ -296,6 +296,10 @@ if (Meteor.isClient) {
       ($log) => $log.debug('O módulo jankenpo esta funcionando!')
     ]);
 
+  function onReady() {
+    angular.bootstrap(document, ['jankenpo']);
+  }
+
   if (Meteor.isCordova) {
     angular.element(document).on('deviceready', onReady);
   } else {
@@ -305,8 +309,4 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(() => console.log('O Servidor do Jankenpo esta funcionando!'));
-}
-
-function onReady() {
-  angular.bootstrap(document, ['jankenpo']);
 }
